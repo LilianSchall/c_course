@@ -1,3 +1,8 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define FIX_ME_MAISON int pieces; int etages;
+
 /**
  * Bienvenue sur ce cours recapitulatif de tout ce qu'il faut savoir en C.
  * Ce cours a pour objectif d'expliquer de A a Z tous les concepts techniques
@@ -265,6 +270,264 @@ int exo4(int a, unsigned int n)
     return 0;
     // END FIXME
 }
+
+/**
+ * L'espace memoire et les pointeurs:
+ * Dans un ordinateur, la memoire est un espace de stockage de donnees 2
+ * dimensions. La dimensions x est l'adresse memoire, et la dimension y est la
+ * taille de mot. Sur les ordinateurs moderne, la taille de mot est de 32 bits.
+ * Maintenant, a chaque allocation de memoire que l'on fait, on reserve une
+ * adresse memoire dans l'espace memoire. 
+ * Cette adresse est represente par un pointeur en C: en effet, un pointeur est
+ * une variable qui stocke l'adresse memoire d'une autre variable. Comme les
+ * pointeurs sont des variables, ils ont aussi une adresse memoire, et donc on
+ * peut faire des pointeurs de pointeurs.
+ */
+void example2(void)
+{
+    /* Prenons par exemple cet entier */
+    int entier = 10;
+
+    /* Si je souhaite obtenir l'adresse memoire de cette variable, j'utilise
+     * l'operateur & */
+    int *pointeur = &entier;
+
+    /* Si je souhaite obtenir la valeur de la variable pointee par le pointeur,
+     * j'utilise l'operateur * */
+    int valeur = *pointeur;
+
+    /* Ici, valeur = entier = 10 */
+    /** 
+     * Je peux aussi modifier la valeur de la variable pointee par le pointeur,
+     * c'est a dire modifier la valeur de la variable "entier".
+     */
+    *pointeur = 20;
+    /* Ici, entier = 20, mais valeur vaut encore 10 */
+}
+
+/**
+ * Supposons que je veuille qu'une fonction modifie la valeur d'une variable
+ * sans la retourner. Je vais alors donner l'adresse de la variable que je
+ * souhaite modifier a la fonction.
+ */
+void elever_au_carre(int *a)
+{
+    *a = *a * *a;
+}
+
+void example3(void)
+{
+    int a = 5;
+    elever_au_carre(&a);
+    /* Ici, a = 25 */
+}
+
+/**
+ * Exercice 5: Ecrire une fonction qui prend en parametre un entier a et un
+ * pointeur sur un entier b, et qui affecte la valeur de a a la variable pointee
+ * par b.
+ */
+void exo5(int a, int *b)
+{
+    // BEGIN FIXME
+    // END FIXME
+}
+
+/**
+ * Exercice 6: Ecrire une fonction qui echange les deux valeurs de deux entiers
+ * a et b.
+ * Exemple: a = 5, b = 10 -> a = 10, b = 5
+ */
+void exo6(long *a, long *b)
+{
+    // BEGIN FIXME
+    // END FIXME
+}
+
+/**
+ * Les structures:
+ * En C, une structure est un type de donnee compose qui permet de regrouper
+ * plusieurs variables de types differents sous un meme nom. Une structure est
+ * definie par le mot clef struct suivi du nom de la structure, puis des
+ * variables qui la compose.
+ */
+struct Rectangle
+{
+    int longueur;
+    int largeur;
+};
+
+/* On peut aussi creer une structure dans une structure */
+struct Point
+{
+    int x;
+    int y;
+};
+struct Carre
+{
+    struct Point p;
+    int cote;
+};
+
+/* Mais aussi une structure qui stocke un ou plusieurs pointeurs */
+struct Liste
+{
+    struct Liste *suivant;
+    int valeur;
+};
+
+/**
+ * On peut aussi renommer un type que l'on a cree avec le mot clef typedef
+ * Ici, il faut mettre le nom du type que l'on veut renommer, et le nom que l'on
+ * veut lui donner a la toute fin.
+ */
+typedef struct Liste UnidirectionalList;
+
+/**
+ * On peut aussi renommer un type de base. On pourra alors utiliser le mot clef
+ * "int" ou le nouveau type "Entier" pour representer le meme type.
+ */
+typedef int Entier;
+
+void example4(void)
+{
+    /* Pour creer une variable de type structure, on utilise le nom de la
+     * structure suivi du nom de la variable */
+    struct Rectangle r;
+
+    /* Pour acceder a une variable de la structure, on utilise l'operateur . */
+    r.longueur = 10;
+    r.largeur = 5;
+
+    /* On peut aussi creer un pointeur sur une structure */
+    struct Rectangle *p = &r;
+
+    /**
+     * Pour acceder a une variable de la structure pointee, on utilise l'operateur
+     * -> 
+     */
+    p->longueur = 20;
+    p->largeur = 10;
+
+    struct Carre c;
+    c.p.x = 10;
+    c.p.y = 5;
+    c.cote = 10;
+
+    struct Liste l1;
+    UnidirectionalList l2; /* struct Liste */
+
+    l1.suivant = &l2;
+    l1.valeur = 10;
+    l2.suivant = NULL;
+    l2.valeur = 20;
+}
+
+/**
+ * Exercice 7: Definir une structure nommee Maison qui contient les champs:
+ * - un entier pour le nombre de pieces
+ * - un entier pour le nombre d'etages
+ *   Puis, ecrire une fonction qui prend en parametre une maison et qui renvoie
+ *   le nombre total de pieces de la maison.
+ */
+struct Maison
+{
+    // BEGIN FIXME
+    FIX_ME_MAISON
+    // END FIXME
+};
+
+int exo7(struct Maison m)
+{
+    // BEGIN FIXME
+    return 0;
+    // END FIXME
+}
+
+/**
+ * Exercice 8: Cette fois-ci, la fonction prend en parametre un pointeur sur
+ * une maison et modifier le nombre de pieces, pour qu'il y ait autant de
+ * pieces, que la moitie du nombre d'etages.
+ * Example: si la maison a 4 etages, elle doit avoir 2 pieces.
+ */
+void exo8(struct Maison *m)
+{
+    // BEGIN FIXME
+    // END FIXME
+}
+
+/**
+ * Les tableaux:
+ * En C, un tableau est une plage memoire qui permet de stocker plusieurs
+ * valeurs de meme type sous un meme nom. Un tableau est defini par le type de
+ * donnee suivi du nom du tableau, puis de la taille du tableau entre crochets.
+ */
+void example5(void)
+{
+    int tab[10];
+    int taille = 10;
+
+    for (int i = 0; i < taille; i++)
+    {
+        tab[i] = i;
+    }
+    /* Le tableau tab contient desormais les valeurs de 0 a 9 */
+
+    /* On peut aussi creer un tableau de pointeurs */
+    struct Maison* quartier[2];
+
+    struct Maison m1;
+    m1.pieces = 5;
+    m1.etages = 2;
+
+    struct Maison m2;
+    m2.pieces = 10;
+    m2.etages = 3;
+
+    quartier[0] = &m1;
+    quartier[1] = &m2;
+
+    /**
+     * Si on souhaite acceder le nombre de pieces de la maison m1, on va alors
+     * effectuer l'operation suivante:
+     */
+    int nb_pieces = quartier[0]->pieces;
+
+    /**
+     * On peut aussi creer un tableau de structures
+     */
+    struct Maison maisons[2];
+    maisons[0].pieces = 5;
+    maisons[0].etages = 2;
+    maisons[1].pieces = 10;
+    maisons[1].etages = 3;
+    /**
+     * Dans ce cas, chaque case du tableau contient une structure Maison, ce
+     * qui est different d'avoir un tableau de pointeurs sur des structures.
+     * La raison est que si on souhaite stocker une case du tableau dans une
+     * variable, on va stocker une copie de la case, et non l'adresse de la
+     * case. La case et la variable vont donc etre differentes, des lors que
+     * l'une ou l'autre est modifiee.
+     */
+    struct Maison m = maisons[0];
+    m.pieces = 10;
+    /**
+     * Ici m.pieces vaut 10, mais maisons[0].pieces vaut 5.
+     */
+}
+
+/**
+ * Exercice 9: Ecrire une fonction qui prend en parametre un tableau d'entiers
+ * et sa taille, et qui renvoie la somme de tous les elements du tableau.
+ */
+int exo9(int *tab, unsigned int taille)
+{
+    int sum = 0;
+    // BEGIN FIXME
+    // END FIXME
+    return sum;
+}
+
 
 int main(void)
 {

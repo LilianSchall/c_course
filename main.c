@@ -525,6 +525,357 @@ int exo9(int *tab, unsigned int taille)
     return sum;
 }
 
+/**
+ * Exercice 10: Ecrire une fonction qui prend en parametre un tableau d'entiers
+ * et sa taille, et qui renvoie le minimum, le maximum, la moyenne et la mediane
+ * des elements du tableau, en mettant a jour les valeurs pointees par les
+ * pointeurs min, max, mean et median.
+ *
+ */
+void exo10(int *tab, unsigned int taille, int *min, int *max, int *mean, int *median)
+{
+    // BEGIN FIXME
+    // END FIXME
+}
+
+/**
+ * Les chaines de caracteres:
+ * En C, une chaine de caracteres est un tableau de caracteres termine par un
+ * caractere nul ('\0'). Un caractere est un entier representant un caractere
+ * ASCII. Une chaine de caracteres est donc un tableau d'entiers de type char.
+ */
+void example6(void)
+{
+    char chaine[6] = {'H', 'e', 'l', 'l', 'o', '\0'};
+    char chaine2[] = "Hello";
+
+    /**
+     * On peut aussi creer un tableau de chaines de caracteres
+     */
+    char *tab[2] = {"Hello", "World"};
+
+    /**
+     * On peut aussi creer une chaine de caracteres a partir d'un pointeur
+     * Ces chaines de caracteres sont stockees dans la memoire en lecture seule:
+     * on ne peut pas les modifier.
+     */
+    char *chaine3 = "Hello";
+
+    /**
+     * Pour les parcourir, on utilise une boucle for, en s'arretant quand on
+     * rencontre le caractere nul (donc soit 0, soit '\0', c'est la meme chose,
+     * car '\0' vaut litteralement 0).
+     */
+    for (int i = 0; chaine[i] != '\0'; i++)
+    {
+        printf("%c", chaine[i]);
+    }
+}
+
+/**
+ * Exercice 11: Ecrire une fonction qui prend en parametre une chaine de
+ * caracteres et qui renvoie la longueur de la chaine.
+ */
+unsigned int exo11(char *chaine)
+{
+    int size = 0;
+    // BEGIN FIXME
+    // END FIXME
+    return size;
+}
+
+/**
+ * Exercice 12: Ecrire une fonction qui prend en parametre une chaine de
+ * caracteres et qui renvoie 1 si la chaine est un palindrome, 0 sinon.
+ * Un palindrome est une chaine de caracteres qui se lit de la meme maniere
+ * dans les deux sens.
+ * Exemple: "kayak" est un palindrome, "hello" ne l'est pas.
+ */
+int exo12(char *chaine)
+{
+    // BEGIN FIXME
+    return 0;
+    // END FIXME
+}
+
+/**
+ * Exercice 13: Ecrire une fonction qui prend en parametre une chaine de
+ * caracteres et qui modifie cette chaine pour que tous les caracteres 
+ * soient en majuscule.
+ * Exemple: "hello" -> "HELLO"
+ * Exemple: "HeLlO" -> "HELLO"
+ * A noter: on peut effectuer des operations sur les caracteres en C, comme
+ * l'addition, la soustraction, la comparaison, etc.
+ * Ainsi, pour mettre en majuscule un caractere, on peut d'abord verifier si ce
+ * caractere est entre 'a' et 'z', puis lui soustraire 'a' et lui ajouter 'A'.
+ */
+void exo13(char *chaine)
+{
+    // BEGIN FIXME
+    // END FIXME
+}
+
+/**
+ * L'affichage et la saisie:
+ * En C, on peut afficher des donnees a l'ecran en utilisant la fonction printf.
+ * Cette fonction prend en parametre une chaine de caracteres, suivie de valeurs
+ * a afficher.
+ */
+void example7(void)
+{
+    int a = 10;
+    printf("La valeur de a est %d\n", a);
+    /**
+     * %d est un format de conversion qui permet d'afficher un entier.
+     * Il existe d'autres formats de conversion, comme %f pour afficher un
+     * nombre reel, %c pour afficher un caractere, %s pour afficher une chaine
+     * de caracteres, etc.
+     */
+
+    /**
+     * On peut aussi lire des donnees a partir du clavier en utilisant la
+     * fonctions scanf. Cette fonction prend en parametre une chaine de
+     * caracteres, suivie de pointeurs sur des variables ou stocker les valeurs.
+     */
+    int b;
+    scanf("%d", &b);
+    /**
+     * Ici, on va lire un entier a partir du clavier et le stocker dans la
+     * variable b.
+     */
+}
+
+/**
+ * Exercice 14: Ecrire une fonction qui prend en parametre un entier a et qui
+ * affiche la valeur de a a l'ecran.
+ */
+void exo14(int a)
+{
+    // BEGIN FIXME
+    // END FIXME
+}
+
+/**
+ * Exercice 15: Ecrire une fonction qui prend en parametre un entier a et qui
+ * renvoie la valeur lue a partir du clavier.
+ */
+int exo15(void)
+{
+    int a;
+    // BEGIN FIXME
+    return 0;
+    // END FIXME
+}
+
+/**
+ * La recursivite:
+ * La recursivite est une technique de programmation qui consiste a resoudre un
+ * probleme en le decoupant en sous-problemes plus petits, jusqu'a arriver a un
+ * probleme simple a resoudre. On appelle cette technique "diviser pour
+ * regner".
+ * En C, on peut ecrire des fonctions recursives, c'est a dire des fonctions qui
+ * s'appellent elles-memes.
+ * Attention: une fonction recursive doit avoir une condition d'arret, sinon
+ * elle va s'appeler indefiniment et ca va planter.
+ * Exemple: la factorielle d'un entier n est n * (n-1) * (n-2) * ... * 1
+ * Exemple: la somme des n premiers entiers est n + (n-1) + (n-2) + ... + 1
+ */
+int example8_somme(int n)
+{
+    if (n == 0)
+    {
+        return 0;
+    }
+    return n + example8_somme(n - 1);
+}
+
+int exo16(int n)
+{
+    // BEGIN FIXME
+    return 0;
+    // END FIXME
+}
+
+/**
+ * Exercice 17: Ecrire une fonction recursive representant la suite de
+ * Fibonacci. La suite de Fibonacci est une suite de nombres definie par la
+ * relation de recurrence suivante:
+ * F(0) = 0
+ * F(1) = 1
+ * F(n) = F(n-1) + F(n-2)
+ */
+int exo17(int n)
+{
+    // BEGIN FIXME
+    return 0;
+    // END FIXME
+}
+
+/**
+ * Exercice 18: Ecrire une fonction recursive qui prend en parametre un entier 
+ * n et qui renvoie le n-ieme terme de la suite de Syracuse. La suite de
+ * Syracuse est une suite de nombres definie par la relation de recurrence
+ * suivante:
+ * Si n est pair, alors n = n / 2
+ * Si n est impair, alors n = 3n + 1
+ * La suite s'arrete quand n vaut 1.
+ * Exemple: exo18(5) = 16
+ */
+int exo18(int n)
+{
+    // BEGIN FIXME
+    return 0;
+    // END FIXME
+}
+
+/**
+ * Exercice 19: Ecrire une fonction recursive qui prend en parametre un entier
+ * n et qui renvoie le n-ieme terme de la suite de Collatz. La suite de Collatz
+ * est une suite de nombres definie par la relation de recurrence suivante:
+ * Si n est pair, alors n = n / 2
+ * Si n est impair, alors n = 3n + 1
+ * La suite s'arrete quand n vaut 1.
+ * Exemple: exo19(5) = 16
+ */
+int exo19(int n)
+{
+    // BEGIN FIXME
+    return 0;
+    // END FIXME
+}
+
+/**
+ * Exercice 20: Ecrire une fonction recursive qui prend en parametre un tableau
+ * d'entiers, sa taille et un entier representant un index,
+ * et qui trie le tableau en utilisant le tri a bulles.
+ * Le tri a bulles est un algorithme de tri qui consiste a parcourir le tableau
+ * en echangeant les elements adjacents si ils sont dans le mauvais ordre.
+ * On repete cette operation jusqu'a ce qu'il n'y ait plus d'echange a faire.
+ * Exemple: [5, 3, 8, 1, 2] -> [3, 5, 1, 2, 8] -> [3, 1, 2, 5, 8] -> ...
+ * On pourra utiliser la fonction de l'exercice 6 pour echanger deux valeurs.
+ */
+void exo20(int *tab, unsigned int taille, unsigned int index)
+{
+    // BEGIN FIXME
+    // END FIXME
+}
+
+/**
+ * La structure de la memoire et l'allocation dynamique:
+ * En C, la memoire est divisee en plusieurs parties:
+ * - La pile: c'est la partie de la memoire qui stocke les variables locales
+ *   des fonctions, les parametres des fonctions, les adresses de retour, etc.
+ * - Le tas: c'est la partie de la memoire qui stocke les variables allouees
+ *   dynamiquement, c'est a dire les variables qui sont allouees a l'execution
+ *   du programme, et qui sont liberees a la fin de l'execution.
+ * - Le segment de donnees: c'est la partie de la memoire qui stocke les
+ *   variables globales et statiques.
+ * - Le segment de code: c'est la partie de la memoire qui stocke le code du
+ *   programme.
+ *
+ * En C, on peut allouer de la memoire dynamiquement en utilisant les fonctions
+ * malloc, calloc, realloc et free. Ces fonctions sont definies dans la
+ * bibliotheque stdlib.h. On va alors allouer de la memoire sur le tas.
+ * - malloc: alloue un bloc de memoire de taille donnee
+ * - calloc: alloue un bloc de memoire de taille donnee et l'initialise a 0
+ * - realloc: realloue un bloc de memoire de taille donnee
+ * - free: libere un bloc de memoire alloue dynamiquement
+ * Il est important de liberer la memoire allouee dynamiquement, sinon on
+ * risque de creer des fuites memoire.
+ *
+ * En C, on peut aussi allouer de la memoire pour un tableau en utilisant la
+ * notation suivante:
+ * int *tab = malloc(taille * sizeof(int));
+ *
+ * Explication: sizeof(int) renvoie la taille d'un entier en octets, et donc
+ * taille * sizeof(int) renvoie la taille du tableau en octets.
+ * On alloue donc un espace memoire de taille taille * sizeof(int) octets que
+ * l'on va pouvoir parcourir comme un tableau d'entiers.
+ *
+ * On peut aussi allouer de la memoire pour une structure en utilisant la
+ * notation suivante:
+ * struct Maison *m = malloc(sizeof(struct Maison));
+ *
+ * Explication: sizeof(struct Maison) renvoie la taille de la structure Maison
+ * en octets, et donc malloc(sizeof(struct Maison)) renvoie un pointeur sur une
+ * structure Maison allouee dynamiquement.
+ *
+ * A la fin, il faut liberer la memoire de la maniere suivante:
+ * free(tab);
+ * free(m);
+ */
+void example9(void)
+{
+    int *tab = malloc(10 * sizeof(int));
+    for (int i = 0; i < 10; i++)
+    {
+        tab[i] = i;
+    }
+    /* Le tableau tab contient desormais les valeurs de 0 a 9 */
+    free(tab);
+    /**
+     * A partir de la, le tableau tab n'existe plus, si on tente d'acceder a une
+     * valeur de tab, notre programme plante (il segfault) 
+     */
+
+    struct Maison *m = malloc(sizeof(struct Maison));
+    m->pieces = 5;
+    m->etages = 2;
+    free(m);
+    /**
+     * La structure m n'existe plus, si on tente d'acceder a un champ de m, notre
+     * programme plante (il segfault)
+     */
+}
+
+
+/**
+ * Exercice 21: Ecrire une fonction qui prend en parametre un entier n et qui
+ * renvoie un tableau d'entiers de taille n alloue dynamiquement.
+ */
+int *exo21(unsigned int n)
+{
+    // BEGIN FIXME
+    return NULL;
+    // END FIXME
+}
+
+/**
+ * Exercice 22: Ecrire une fonction qui prend en parametre un tableau d'entiers
+ * et sa taille, et qui renvoie un tableau d'entiers contenant les elements du
+ * tableau initial dans l'ordre inverse.
+ */
+int *exo22(int *tab, unsigned int taille)
+{
+    // BEGIN FIXME
+    return NULL;
+    // END FIXME
+}
+
+/**
+ * Exercice 23: Ecrire une fonction qui prend en parametre un tableau d'entiers
+ * et sa taille, et qui renvoie un tableau d'entiers contenant les elements du
+ * tableau initial tries en ordre croissant.
+ */
+int *exo23(int *tab, unsigned int taille)
+{
+    // BEGIN FIXME
+    return NULL;
+    // END FIXME
+}
+
+/**
+ * Exercice 24: Ecrire une fonction qui prend en parametre une structure
+ * rectangle, et qui a partir de deux points, renvoie un rectangle qui a pour
+ * longueur la distance entre les deux points en x, et pour hauteur la distance entre
+ * les deux points en y.
+ */
+struct Rectangle* exo24(struct Point p1, struct Point p2)
+{
+    // BEGIN FIXME
+    return NULL;
+    // END FIXME
+}
 
 int main(void)
 {

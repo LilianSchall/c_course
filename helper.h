@@ -1,9 +1,13 @@
 #ifndef HELPER_H
 #define HELPER_H
 
+#define _GNU_SOURCE
+#include <fcntl.h>
+#include <unistd.h>
 #include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define FIX_ME_MAISON                                                          \
   int pieces;                                                                  \
@@ -52,10 +56,35 @@ static void print_success(const char *format, ...) {
   } else {                                                                     \
     print_success("Test passed\n");                                            \
   }
-
+#
 #define ASSERT_EQUALS_FLOAT(expected, actual, expr)                            \
   if (expected != actual) {                                                    \
     print_error("%s: Expected %f but got %f\n", expr, expected, actual);       \
+    return 1;                                                                  \
+  } else {                                                                     \
+    print_success("Test passed\n");                                            \
+  }
+
+#define ASSERT_NOT_NULL(actual, expr)                                          \
+  if (actual == NULL) {                                                        \
+    print_error("%s: Expected not NULL but got NULL\n", expr);                 \
+    return 1;                                                                  \
+  } else {                                                                     \
+    print_success("Test passed\n");                                            \
+  }
+
+#define ASSERT_STDOUT(expected, command, expr)                                 \
+  int stdout_fd = dup(fileno(stdout));                                         \
+  int pipefd[2];                                                               \
+  pipe2(pipefd, 0);                                                            \
+  dup2(pipefd[1], fileno(stdout));                                             \
+  command;                                                                     \
+  fflush(stdout);                                                              \
+  char buffer[1024];                                                           \
+  read(pipefd[0], buffer, 1024);                                               \
+  dup2(stdout_fd, fileno(stdout));                                             \
+  if (strcmp(buffer, expected) != 0) {                                         \
+    print_error("%s: Expected %s but got %s\n", expr, expected, buffer);       \
     return 1;                                                                  \
   } else {                                                                     \
     print_success("Test passed\n");                                            \

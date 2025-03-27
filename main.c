@@ -351,7 +351,7 @@ void exo6(long *a, long *b)
 struct Rectangle
 {
     int longueur;
-    int largeur;
+    int hauteur;
 };
 
 /* On peut aussi creer une structure dans une structure */
@@ -394,7 +394,7 @@ void example4(void)
 
     /* Pour acceder a une variable de la structure, on utilise l'operateur . */
     r.longueur = 10;
-    r.largeur = 5;
+    r.hauteur = 5;
 
     /* On peut aussi creer un pointeur sur une structure */
     struct Rectangle *p = &r;
@@ -404,7 +404,7 @@ void example4(void)
      * -> 
      */
     p->longueur = 20;
-    p->largeur = 10;
+    p->hauteur = 10;
 
     struct Carre c;
     c.p.x = 10;
@@ -689,6 +689,11 @@ int example8_somme(int n)
     return n + example8_somme(n - 1);
 }
 
+/**
+ * Exercice 16: Ecrire une fonction recursive qui prend en parametre un entier
+ * n et qui renvoie la factorielle de n.
+ * Exemple: exo16(5) = 120
+ */
 int exo16(int n)
 {
     // BEGIN FIXME
@@ -1002,6 +1007,189 @@ TEST_CASE(test_exo10)
 }
 END_TEST_CASE
 
+TEST_CASE(test_exo11)
+{
+    ASSERT_EQUALS_INT(5, exo11("Hello"), "exo11(\"Hello\")");
+    ASSERT_EQUALS_INT(0, exo11(""), "exo11(\"\")");
+    ASSERT_EQUALS_INT(10, exo11("HelloWorld"), "exo11(\"HelloWorld\")");
+}
+END_TEST_CASE
+
+TEST_CASE(test_exo12)
+{
+    ASSERT_EQUALS_INT(1, exo12("kayak"), "exo12(\"kayak\")");
+    ASSERT_EQUALS_INT(0, exo12("hello"), "exo12(\"hello\")");
+    ASSERT_EQUALS_INT(1, exo12("radar"), "exo12(\"radar\")");
+    ASSERT_EQUALS_INT(1, exo12("hannah"), "exo12(\"hannah\")");
+}
+END_TEST_CASE
+
+TEST_CASE(test_exo13)
+{
+    char chaine1[] = "hello";
+    exo13(chaine1);
+    ASSERT_EQUALS_STRING("HELLO", chaine1, "exo13(\"hello\")");
+
+    char chaine2[] = "HeLlO";
+    exo13(chaine2);
+    ASSERT_EQUALS_STRING("HELLO", chaine2, "exo13(\"HeLlO\")");
+
+    char chaine3[] = "36129";
+    exo13(chaine3);
+    ASSERT_EQUALS_STRING("36129", chaine3, "exo13(\"36129\")");
+}
+END_TEST_CASE
+
+TEST_CASE(test_exo14)
+{
+    exo14(5);
+    ASSERT_STDOUT("5\n", exo14(5), "exo14(5)");
+}
+END_TEST_CASE
+
+// skip test_exo15 because it requires user input
+
+TEST_CASE(test_exo16)
+{
+    ASSERT_EQUALS_INT(120, exo16(5), "exo16(5)");
+    ASSERT_EQUALS_INT(720, exo16(6), "exo16(6)");
+    ASSERT_EQUALS_INT(5040, exo16(7), "exo16(7)");
+}
+END_TEST_CASE
+
+TEST_CASE(test_exo17)
+{
+    ASSERT_EQUALS_INT(0, exo17(0), "exo17(0)");
+    ASSERT_EQUALS_INT(1, exo17(1), "exo17(1)");
+    ASSERT_EQUALS_INT(1, exo17(2), "exo17(2)");
+    ASSERT_EQUALS_INT(2, exo17(3), "exo17(3)");
+    ASSERT_EQUALS_INT(3, exo17(4), "exo17(4)");
+    ASSERT_EQUALS_INT(5, exo17(5), "exo17(5)");
+    ASSERT_EQUALS_INT(8, exo17(6), "exo17(6)");
+    ASSERT_EQUALS_INT(13, exo17(7), "exo17(7)");
+}
+END_TEST_CASE
+
+TEST_CASE(test_exo18)
+{
+    ASSERT_EQUALS_INT(1, exo18(1), "exo18(1)");
+    ASSERT_EQUALS_INT(16, exo18(5), "exo18(5)");
+    ASSERT_EQUALS_INT(22, exo18(7), "exo18(7)");
+    ASSERT_EQUALS_INT(111, exo18(27), "exo18(27)");
+}
+END_TEST_CASE
+
+TEST_CASE(test_exo19)
+{
+    ASSERT_EQUALS_INT(1, exo19(1), "exo19(1)");
+    ASSERT_EQUALS_INT(16, exo19(5), "exo19(5)");
+    ASSERT_EQUALS_INT(22, exo19(7), "exo19(7)");
+    ASSERT_EQUALS_INT(111, exo19(27), "exo19(27)");
+}
+END_TEST_CASE
+
+TEST_CASE(test_exo20)
+{
+    int tab1[] = {5, 3, 8, 1, 2};
+    exo20(tab1, 5, 0);
+    ASSERT_EQUALS_INT(1, tab1[0], "exo20(tab1, 5, 0), test 0");
+    ASSERT_EQUALS_INT(2, tab1[1], "exo20(tab1, 5, 0), test 1");
+    ASSERT_EQUALS_INT(3, tab1[2], "exo20(tab1, 5, 0), test 2");
+    ASSERT_EQUALS_INT(5, tab1[3], "exo20(tab1, 5, 0), test 3");
+    ASSERT_EQUALS_INT(8, tab1[4], "exo20(tab1, 5, 0), test 4");
+
+    int tab2[] = {5, 3, 8, 1, 2};
+    exo20(tab2, 5, 1);
+    ASSERT_EQUALS_INT(3, tab2[0], "exo20(tab2, 5, 1), test 0");
+    ASSERT_EQUALS_INT(5, tab2[1], "exo20(tab2, 5, 1), test 1");
+    ASSERT_EQUALS_INT(1, tab2[2], "exo20(tab2, 5, 1), test 2");
+    ASSERT_EQUALS_INT(2, tab2[3], "exo20(tab2, 5, 1), test 3");
+    ASSERT_EQUALS_INT(8, tab2[4], "exo20(tab2, 5, 1), test 4");
+}
+END_TEST_CASE
+
+TEST_CASE(test_exo21)
+{
+    int *tab1 = exo21(5);
+    ASSERT_NOT_NULL(tab1, "exo21(5)");
+    free(tab1);
+
+    int *tab2 = exo21(10);
+    ASSERT_NOT_NULL(tab2, "exo21(10)");
+    free(tab2);
+}
+END_TEST_CASE
+
+TEST_CASE(test_exo22)
+{
+    int tab1[] = {1, 2, 3, 4, 5};
+    int *tab2 = exo22(tab1, 5);
+    ASSERT_NOT_NULL(tab2, "exo22(tab1, 5)");
+    ASSERT_EQUALS_INT(5, tab2[0], "exo22(tab1, 5), test 0");
+    ASSERT_EQUALS_INT(4, tab2[1], "exo22(tab1, 5), test 1");
+    ASSERT_EQUALS_INT(3, tab2[2], "exo22(tab1, 5), test 2");
+    ASSERT_EQUALS_INT(2, tab2[3], "exo22(tab1, 5), test 3");
+    ASSERT_EQUALS_INT(1, tab2[4], "exo22(tab1, 5), test 4");
+    free(tab2);
+
+    int tab3[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    int *tab4 = exo22(tab3, 10);
+    ASSERT_NOT_NULL(tab4, "exo22(tab3, 10)");
+    ASSERT_EQUALS_INT(10, tab4[0], "exo22(tab3, 10), test 0");
+    ASSERT_EQUALS_INT(9, tab4[1], "exo22(tab3, 10), test 1");
+    ASSERT_EQUALS_INT(8, tab4[2], "exo22(tab3, 10), test 2");
+    ASSERT_EQUALS_INT(7, tab4[3], "exo22(tab3, 10), test 3");
+    ASSERT_EQUALS_INT(6, tab4[4], "exo22(tab3, 10), test 4");
+    ASSERT_EQUALS_INT(5, tab4[5], "exo22(tab3, 10), test 5");
+    ASSERT_EQUALS_INT(4, tab4[6], "exo22(tab3, 10), test 6");
+    ASSERT_EQUALS_INT(3, tab4[7], "exo22(tab3, 10), test 7");
+    ASSERT_EQUALS_INT(2, tab4[8], "exo22(tab3, 10), test 8");
+    ASSERT_EQUALS_INT(1, tab4[9], "exo22(tab3, 10), test 9");
+    free(tab4);
+}
+END_TEST_CASE
+
+TEST_CASE(test_exo23)
+{
+    int tab1[] = {5, 3, 8, 1, 2};
+    int *tab2 = exo23(tab1, 5);
+    ASSERT_NOT_NULL(tab2, "exo23(tab1, 5)");
+    ASSERT_EQUALS_INT(1, tab2[0], "exo23(tab1, 5), test 0");
+    ASSERT_EQUALS_INT(2, tab2[1], "exo23(tab1, 5), test 1");
+    ASSERT_EQUALS_INT(3, tab2[2], "exo23(tab1, 5), test 2");
+    ASSERT_EQUALS_INT(5, tab2[3], "exo23(tab1, 5), test 3");
+    ASSERT_EQUALS_INT(8, tab2[4], "exo23(tab1, 5), test 4");
+    free(tab2);
+
+    int tab3[] = {5, 3, 8, 1, 2, 6, 4, 7, 9, 10};
+    int *tab4 = exo23(tab3, 10);
+    ASSERT_NOT_NULL(tab4, "exo23(tab3, 10)");
+    ASSERT_EQUALS_INT(1, tab4[0], "exo23(tab3, 10), test 0");
+    ASSERT_EQUALS_INT(2, tab4[1], "exo23(tab3, 10), test 1");
+    ASSERT_EQUALS_INT(3, tab4[2], "exo23(tab3, 10), test 2");
+    ASSERT_EQUALS_INT(4, tab4[3], "exo23(tab3, 10), test 3");
+    ASSERT_EQUALS_INT(5, tab4[4], "exo23(tab3, 10), test 4");
+    ASSERT_EQUALS_INT(6, tab4[5], "exo23(tab3, 10), test 5");
+    ASSERT_EQUALS_INT(7, tab4[6], "exo23(tab3, 10), test 6");
+    ASSERT_EQUALS_INT(8, tab4[7], "exo23(tab3, 10), test 7");
+    ASSERT_EQUALS_INT(9, tab4[8], "exo23(tab3, 10), test 8");
+    ASSERT_EQUALS_INT(10, tab4[9], "exo23(tab3, 10), test 9");
+    free(tab4);
+}
+END_TEST_CASE
+
+TEST_CASE(test_exo24)
+{
+    struct Point p1 = {0, 0};
+    struct Point p2 = {3, 4};
+    struct Rectangle *r = exo24(p1, p2);
+    ASSERT_NOT_NULL(r, "exo24(p1, p2)");
+    ASSERT_EQUALS_INT(3, r->longueur, "exo24(p1, p2), test longueur");
+    ASSERT_EQUALS_INT(4, r->hauteur, "exo24(p1, p2), test hauteur");
+    free(r);
+}
+END_TEST_CASE
+
 int main(void)
 {
     RETURN_ON_FAILURE(test_exo1());
@@ -1014,5 +1202,19 @@ int main(void)
     RETURN_ON_FAILURE(test_exo8());
     RETURN_ON_FAILURE(test_exo9());
     RETURN_ON_FAILURE(test_exo10());
+    RETURN_ON_FAILURE(test_exo11());
+    RETURN_ON_FAILURE(test_exo12());
+    RETURN_ON_FAILURE(test_exo13());
+    RETURN_ON_FAILURE(test_exo14());
+    RETURN_ON_FAILURE(test_exo16());
+    RETURN_ON_FAILURE(test_exo17());
+    RETURN_ON_FAILURE(test_exo18());
+    RETURN_ON_FAILURE(test_exo19());
+    RETURN_ON_FAILURE(test_exo20());
+    RETURN_ON_FAILURE(test_exo21());
+    RETURN_ON_FAILURE(test_exo22());
+    RETURN_ON_FAILURE(test_exo23());
+    RETURN_ON_FAILURE(test_exo24());
+    return 0;
 }
 

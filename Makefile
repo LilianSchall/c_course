@@ -5,6 +5,9 @@ MAIN = main.c
 MAIN_O = main.o
 EXE = main
 
+run: clean $(EXE)
+	./$(EXE)
+
 all: $(EXE)
 
 $(EXE): $(MAIN_O)

@@ -225,7 +225,7 @@ int exo1(void)
     // BEGIN FIXME
     int a = 0;
     // END FIXME
-    return a;
+    return a / 2;
 }
 
 /**
@@ -877,7 +877,138 @@ struct Rectangle* exo24(struct Point p1, struct Point p2)
     // END FIXME
 }
 
+/**
+ * Le cours est termine ! Vous avez appris les bases du langage C, et vous etes
+ * maintenant capable de resoudre des problemes simples en C.
+ */
+
+/** 
+ * A partir de la, ne pas prendre compte du code suivant, il s'agit de tests
+ * unitaires pour verifier la validite des fonctions ecrites.
+ */
+
+TEST_CASE(test_exo1)
+{
+    ASSERT_EQUALS_INT(2, exo1(), "exo1()");
+}
+END_TEST_CASE
+
+TEST_CASE(test_exo2)
+{
+    ASSERT_EQUALS_INT(5, exo2(2, 3), "exo2(2, 3)");
+    ASSERT_EQUALS_INT(7, exo2(4, 3), "exo2(4, 3)");
+    ASSERT_EQUALS_INT(9, exo2(8, 1), "exo2(8, 1)");
+}
+END_TEST_CASE
+
+TEST_CASE(test_exo3)
+{
+    ASSERT_EQUALS_INT(1, exo3(2, 0), "exo3(2, 0)");
+    ASSERT_EQUALS_INT(8, exo3(2, 3), "exo3(2, 3)");
+    ASSERT_EQUALS_INT(1024, exo3(2, 10), "exo3(2, 10)");
+    ASSERT_EQUALS_INT(65536, exo3(2, 16), "exo3(2, 16)");
+}
+END_TEST_CASE
+
+TEST_CASE(test_exo4)
+{
+    ASSERT_EQUALS_INT(1, exo4(2, 0), "exo4(2, 0)");
+    ASSERT_EQUALS_INT(8, exo4(2, 3), "exo4(2, 3)");
+    ASSERT_EQUALS_INT(1024, exo4(2, 10), "exo4(2, 10)");
+    ASSERT_EQUALS_INT(65536, exo4(2, 16), "exo4(2, 16)");
+}
+END_TEST_CASE
+
+TEST_CASE(test_exo5)
+{
+    int b = 0;
+    exo5(5, &b);
+    ASSERT_EQUALS_INT(5, b, "exo5(5, &b)");
+    exo5(8, &b);
+    ASSERT_EQUALS_INT(8, b, "exo5(8, &b)");
+}
+END_TEST_CASE
+
+TEST_CASE(test_exo6)
+{
+    long a = 3, b = 18;
+    exo6(&a, &b);
+    ASSERT_EQUALS_INT(18, a, "exo6(&a, &b), test a");
+    ASSERT_EQUALS_INT(3, b, "exo6(&a, &b), test b");
+    exo6(&a, &b);
+    ASSERT_EQUALS_INT(3, a, "exo6(&a, &b), test a");
+    ASSERT_EQUALS_INT(18, b, "exo6(&a, &b), test b");
+}
+END_TEST_CASE
+
+TEST_CASE(test_exo7)
+{
+    struct Maison m;
+
+    m.pieces = 5;
+    m.etages = 2;
+    ASSERT_EQUALS_INT(5, exo7(m), "exo7(m)");
+
+    m.pieces = 10;
+    m.etages = 3;
+    ASSERT_EQUALS_INT(10, exo7(m), "exo7(m)");
+}
+END_TEST_CASE
+
+TEST_CASE(test_exo8)
+{
+    struct Maison m;
+
+    m.pieces = 5;
+    m.etages = 2;
+    exo8(&m);
+    ASSERT_EQUALS_INT(1, m.pieces, "exo8(&m), test pieces");
+    ASSERT_EQUALS_INT(2, m.etages, "exo8(&m), test etages");
+
+    m.pieces = 10;
+    m.etages = 3;
+    exo8(&m);
+    ASSERT_EQUALS_INT(1, m.pieces, "exo8(&m), test pieces");
+    ASSERT_EQUALS_INT(3, m.etages, "exo8(&m), test etages");
+}
+END_TEST_CASE
+
+TEST_CASE(test_exo9)
+{
+    int tab1[] = {1, 2, 3, 4, 5};
+    ASSERT_EQUALS_INT(15, exo9(tab1, 5), "exo9(tab1, 5)");
+
+    int tab2[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    ASSERT_EQUALS_INT(55, exo9(tab2, 10), "exo9(tab2, 10)");
+}
+END_TEST_CASE
+
+TEST_CASE(test_exo10)
+{
+    int tab1[] = {1, 2, 3, 4, 5};
+    int min, max, mean, median;
+    exo10(tab1, 5, &min, &max, &mean, &median);
+    ASSERT_EQUALS_INT(1, min, "exo10(tab1, 5, &min, &max, &mean, &median), test min");
+    ASSERT_EQUALS_INT(5, max, "exo10(tab1, 5, &min, &max, &mean, &median), test max");
+    ASSERT_EQUALS_INT(3, mean, "exo10(tab1, 5, &min, &max, &mean, &median), test mean");
+    ASSERT_EQUALS_INT(3, median, "exo10(tab1, 5, &min, &max, &mean, &median), test median");
+
+    int tab2[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    exo10(tab2, 10, &min, &max, &mean, &median);
+    ASSERT_EQUALS_INT(1, min, "exo10(tab2, 10, &min, &max, &mean, &median), test min");
+    ASSERT_EQUALS_INT(10, max, "exo10(tab2, 10, &min, &max, &mean, &median), test max");
+    ASSERT_EQUALS_INT(5, mean, "exo10(tab2, 10, &min, &max, &mean, &median), test mean");
+    ASSERT_EQUALS_INT(5, median, "exo10(tab2, 10, &min, &max, &mean, &median), test median");
+}
+END_TEST_CASE
+
 int main(void)
 {
-    return 0;
+    RETURN_ON_FAILURE(test_exo1());
+    RETURN_ON_FAILURE(test_exo2());
+    RETURN_ON_FAILURE(test_exo3());
+    RETURN_ON_FAILURE(test_exo4());
+    RETURN_ON_FAILURE(test_exo5());
+    RETURN_ON_FAILURE(test_exo6());
 }
+

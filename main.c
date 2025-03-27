@@ -1,7 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-
-#define FIX_ME_MAISON int pieces; int etages;
+#include "helper.h"
 
 /**
  * Bienvenue sur ce cours recapitulatif de tout ce qu'il faut savoir en C.
@@ -253,7 +250,7 @@ int exo2(int a, int b)
 int exo3(int a, unsigned int n)
 {
     int result = 1;
-    for (int i = 0; i < n; i++)
+    for (unsigned int i = 0; i < n; i++)
     {
         // BEGIN FIXME
         // END FIXME

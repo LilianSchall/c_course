@@ -1010,5 +1010,9 @@ int main(void)
     RETURN_ON_FAILURE(test_exo4());
     RETURN_ON_FAILURE(test_exo5());
     RETURN_ON_FAILURE(test_exo6());
+    RETURN_ON_FAILURE(test_exo7());
+    RETURN_ON_FAILURE(test_exo8());
+    RETURN_ON_FAILURE(test_exo9());
+    RETURN_ON_FAILURE(test_exo10());
 }
 

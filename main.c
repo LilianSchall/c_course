@@ -942,7 +942,7 @@ END_TEST_CASE
 
 TEST_CASE(test_exo6)
 {
-    long a = 3, b = 18;
+    int a = 3, b = 18;
     exo6(&a, &b);
     ASSERT_EQUALS_INT(18, a, "exo6(&a, &b), test a");
     ASSERT_EQUALS_INT(3, b, "exo6(&a, &b), test b");

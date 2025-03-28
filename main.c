@@ -335,7 +335,7 @@ void exo5(int a, int *b)
  * a et b.
  * Exemple: a = 5, b = 10 -> a = 10, b = 5
  */
-void exo6(long *a, long *b)
+void exo6(int *a, int *b)
 {
     // BEGIN FIXME
     // END FIXME
@@ -719,14 +719,17 @@ int exo17(int n)
 }
 
 /**
- * Exercice 18: Ecrire une fonction recursive qui prend en parametre un entier 
- * n et qui renvoie le n-ieme terme de la suite de Syracuse. La suite de
+ * Exercice 18: Ecrire une fonction recursive qui prend en parametre un entier
+ * n et qui renvoie la duree de vol du terme de la suite de Syracuse. La suite de
  * Syracuse est une suite de nombres definie par la relation de recurrence
  * suivante:
  * Si n est pair, alors n = n / 2
  * Si n est impair, alors n = 3n + 1
  * La suite s'arrete quand n vaut 1.
- * Exemple: exo18(5) = 16
+ * La duree de vol est le nombre d'iterations pour que n vaille 1.
+ * Exemple: exo18(1) = 0
+ * Exemple: exo18(5) = 5 car 5 -> 16 -> 8 -> 4 -> 2 -> 1
+ * Exemple: exo18(6) = 8 car 6 -> 3 -> 10 -> 5 -> 16 -> 8 -> 4 -> 2 -> 1
  */
 int exo18(int n)
 {
@@ -757,17 +760,13 @@ int exo19(int n, int p)
 
 /**
  * Exercice 20: Ecrire une fonction recursive qui prend en parametre un tableau
- * d'entiers, sa taille et un entier representant un index,
- * et qui trie le tableau en utilisant le tri a bulles.
- * Le tri a bulles est un algorithme de tri qui consiste a parcourir le tableau
- * en echangeant les elements adjacents si ils sont dans le mauvais ordre.
- * On repete cette operation jusqu'a ce qu'il n'y ait plus d'echange a faire.
- * Exemple: [5, 3, 8, 1, 2] -> [3, 5, 1, 2, 8] -> [3, 1, 2, 5, 8] -> ...
- * On pourra utiliser la fonction de l'exercice 6 pour echanger deux valeurs.
- */
-void exo20(int *tab, unsigned int taille, unsigned int index)
+ * d'entiers, sa taille et qui renvoie la somme de tous les elements du tableau.
+ * Exemple: exo20([1, 2, 3, 4, 5], 5) = 15
+ * */
+int exo20(int *tab, unsigned int taille)
 {
     // BEGIN FIXME
+    return 0;
     // END FIXME
 }
 
@@ -866,7 +865,8 @@ int *exo22(int *tab, unsigned int taille)
 /**
  * Exercice 23: Ecrire une fonction qui prend en parametre un tableau d'entiers
  * et sa taille, et qui renvoie un tableau d'entiers contenant les elements du
- * tableau initial tries en ordre croissant.
+ * tableau initial tries en ordre croissant. On pourra utiliser l'algorithme
+ * de tri a bulles et utiliser la fonction d'echange de l'exercice 6.
  */
 int *exo23(int *tab, unsigned int taille)
 {
@@ -878,8 +878,8 @@ int *exo23(int *tab, unsigned int taille)
 /**
  * Exercice 24: Ecrire une fonction qui prend en parametre une structure
  * rectangle, et qui a partir de deux points, renvoie un rectangle qui a pour
- * longueur la distance entre les deux points en x, et pour hauteur la distance entre
- * les deux points en y.
+ * longueur la distance L1 entre les deux points en x, 
+ * et pour hauteur la distance L1 entre les deux points en y.
  */
 struct Rectangle* exo24(struct Point p1, struct Point p2)
 {
@@ -1120,21 +1120,14 @@ END_TEST_CASE
 
 TEST_CASE(test_exo20)
 {
-    int tab1[] = {5, 3, 8, 1, 2};
-    exo20(tab1, 5, 0);
-    ASSERT_EQUALS_INT(1, tab1[0], "exo20(tab1, 5, 0), test 0");
-    ASSERT_EQUALS_INT(2, tab1[1], "exo20(tab1, 5, 0), test 1");
-    ASSERT_EQUALS_INT(3, tab1[2], "exo20(tab1, 5, 0), test 2");
-    ASSERT_EQUALS_INT(5, tab1[3], "exo20(tab1, 5, 0), test 3");
-    ASSERT_EQUALS_INT(8, tab1[4], "exo20(tab1, 5, 0), test 4");
+    int tab1[] = {1, 2, 3, 4, 5};
+    ASSERT_EQUALS_INT(15, exo20(tab1, 5), "exo20(tab1, 5)");
 
-    int tab2[] = {5, 3, 8, 1, 2};
-    exo20(tab2, 5, 1);
-    ASSERT_EQUALS_INT(3, tab2[0], "exo20(tab2, 5, 1), test 0");
-    ASSERT_EQUALS_INT(5, tab2[1], "exo20(tab2, 5, 1), test 1");
-    ASSERT_EQUALS_INT(1, tab2[2], "exo20(tab2, 5, 1), test 2");
-    ASSERT_EQUALS_INT(2, tab2[3], "exo20(tab2, 5, 1), test 3");
-    ASSERT_EQUALS_INT(8, tab2[4], "exo20(tab2, 5, 1), test 4");
+    int tab2[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    ASSERT_EQUALS_INT(55, exo20(tab2, 10), "exo20(tab2, 10)");
+
+    int tab3[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
+    ASSERT_EQUALS_INT(66, exo20(tab3, 11), "exo20(tab3, 11)");
 }
 END_TEST_CASE
 
@@ -1236,6 +1229,7 @@ int main(void)
     RETURN_ON_FAILURE(test_exo12());
     RETURN_ON_FAILURE(test_exo13());
     RETURN_ON_FAILURE(test_exo14());
+    RETURN_ON_FAILURE(test_exo15());
     RETURN_ON_FAILURE(test_exo16());
     RETURN_ON_FAILURE(test_exo17());
     RETURN_ON_FAILURE(test_exo18());

@@ -83,6 +83,7 @@ static void print_success(const char *format, ...) {
   char buffer[1024];                                                           \
   read(pipefd[0], buffer, 1024);                                               \
   dup2(stdout_fd, fileno(stdout));                                             \
+  buffer[strlen(expected)] = '\0';                                             \
   if (strcmp(buffer, expected) != 0) {                                         \
     print_error("%s: Expected %s but got %s\n", expr, expected, buffer);       \
     return 1;                                                                  \

@@ -76,7 +76,7 @@ static void print_success(const char *format, ...) {
 #define ASSERT_STDOUT(expected, command, expr)                                 \
   int stdout_fd = dup(fileno(stdout));                                         \
   int pipefd[2];                                                               \
-  pipe2(pipefd, 0);                                                            \
+  pipe(pipefd);                                                            \
   dup2(pipefd[1], fileno(stdout));                                             \
   command;                                                                     \
   fflush(stdout);                                                              \
@@ -94,7 +94,7 @@ static void print_success(const char *format, ...) {
 #define ASSERT_STDIN(content, command)                                   \
   int stdin_fd = dup(fileno(stdin));                                           \
   int pipefd[2];                                                               \
-  pipe2(pipefd, 0);                                                            \
+  pipe(pipefd);                                                            \
   write(pipefd[1], content, strlen(content));                                  \
   dup2(pipefd[0], fileno(stdin));                                              \
   command;                                                                     \

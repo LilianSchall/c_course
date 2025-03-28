@@ -422,8 +422,8 @@ void example4(void)
 
 /**
  * Exercice 7: Definir une structure nommee Maison qui contient les champs:
- * - un entier pour le nombre de pieces
- * - un entier pour le nombre d'etages
+ * - un entier pour le nombre de pieces (que l'on appellera "pieces")
+ * - un entier pour le nombre d'etages (que l'on appellera "etages")
  *   Puis, ecrire une fonction qui prend en parametre une maison et qui renvoie
  *   le nombre total de pieces de la maison.
  */
@@ -527,7 +527,8 @@ int exo9(int *tab, unsigned int taille)
 
 /**
  * Exercice 10: Ecrire une fonction qui prend en parametre un tableau d'entiers
- * et sa taille, et qui renvoie le minimum, le maximum, la moyenne et la mediane
+ * triees dans l'ordre croissant, un entier representant 
+ * sa taille, et qui renvoie le minimum, le maximum, la moyenne et la mediane
  * des elements du tableau, en mettant a jour les valeurs pointees par les
  * pointeurs min, max, mean et median.
  *
@@ -590,6 +591,7 @@ unsigned int exo11(char *chaine)
  * Un palindrome est une chaine de caracteres qui se lit de la meme maniere
  * dans les deux sens.
  * Exemple: "kayak" est un palindrome, "hello" ne l'est pas.
+ * Astuce: reutilise l'exo 11 pour obtenir la longueur de la chaine.
  */
 int exo12(char *chaine)
 {
@@ -661,10 +663,10 @@ void exo14(int a)
  */
 int exo15(void)
 {
-    int a;
+    int a = 0;
     // BEGIN FIXME
-    return 0;
     // END FIXME
+    return a;
 }
 
 /**
@@ -734,15 +736,19 @@ int exo18(int n)
 }
 
 /**
- * Exercice 19: Ecrire une fonction recursive qui prend en parametre un entier
- * n et qui renvoie le n-ieme terme de la suite de Collatz. La suite de Collatz
- * est une suite de nombres definie par la relation de recurrence suivante:
- * Si n est pair, alors n = n / 2
- * Si n est impair, alors n = 3n + 1
- * La suite s'arrete quand n vaut 1.
- * Exemple: exo19(5) = 16
+ * Exercice 19: Ecrire une fonction recursive qui calcule le triangle de Pascal.
+ * Le triangle de Pascal est un triangle de nombres qui commence par un 1, et
+ * dont chaque nombre est la somme des deux nombres du dessus.
+ * Exemple:
+ *      1
+ *      1 1
+ *      1 2 1
+ *      1 3 3 1
+ *      1 4 6 4 1
+ * Formule: C(n, p) = C(n-1, p-1) + C(n-1, p)
+ * On a aussi C(n, 0) = C(n, n) = 1
  */
-int exo19(int n)
+int exo19(int n, int p)
 {
     // BEGIN FIXME
     return 0;
@@ -1048,6 +1054,13 @@ TEST_CASE(test_exo14)
 END_TEST_CASE
 
 // skip test_exo15 because it requires user input
+TEST_CASE(test_exo15)
+{
+    int result;
+    ASSERT_STDIN("5\n", result = exo15()); 
+    ASSERT_EQUALS_INT(5, result, "exo15()");
+}
+END_TEST_CASE
 
 TEST_CASE(test_exo16)
 {
@@ -1081,10 +1094,27 @@ END_TEST_CASE
 
 TEST_CASE(test_exo19)
 {
-    ASSERT_EQUALS_INT(1, exo19(1), "exo19(1)");
-    ASSERT_EQUALS_INT(16, exo19(5), "exo19(5)");
-    ASSERT_EQUALS_INT(22, exo19(7), "exo19(7)");
-    ASSERT_EQUALS_INT(111, exo19(27), "exo19(27)");
+    ASSERT_EQUALS_INT(1, exo19(0, 0), "exo19(0, 0)");
+    ASSERT_EQUALS_INT(1, exo19(1, 0), "exo19(1, 0)");
+    ASSERT_EQUALS_INT(1, exo19(1, 1), "exo19(1, 1)");
+    ASSERT_EQUALS_INT(1, exo19(2, 0), "exo19(2, 0)");
+    ASSERT_EQUALS_INT(2, exo19(2, 1), "exo19(2, 1)");
+    ASSERT_EQUALS_INT(1, exo19(2, 2), "exo19(2, 2)");
+    ASSERT_EQUALS_INT(1, exo19(3, 0), "exo19(3, 0)");
+    ASSERT_EQUALS_INT(3, exo19(3, 1), "exo19(3, 1)");
+    ASSERT_EQUALS_INT(3, exo19(3, 2), "exo19(3, 2)");
+    ASSERT_EQUALS_INT(1, exo19(3, 3), "exo19(3, 3)");
+    ASSERT_EQUALS_INT(1, exo19(4, 0), "exo19(4, 0)");
+    ASSERT_EQUALS_INT(4, exo19(4, 1), "exo19(4, 1)");
+    ASSERT_EQUALS_INT(6, exo19(4, 2), "exo19(4, 2)");
+    ASSERT_EQUALS_INT(4, exo19(4, 3), "exo19(4, 3)");
+    ASSERT_EQUALS_INT(1, exo19(4, 4), "exo19(4, 4)");
+    ASSERT_EQUALS_INT(1, exo19(5, 0), "exo19(5, 0)");
+    ASSERT_EQUALS_INT(5, exo19(5, 1), "exo19(5, 1)");
+    ASSERT_EQUALS_INT(10, exo19(5, 2), "exo19(5, 2)");
+    ASSERT_EQUALS_INT(10, exo19(5, 3), "exo19(5, 3)");
+    ASSERT_EQUALS_INT(5, exo19(5, 4), "exo19(5, 4)");
+    ASSERT_EQUALS_INT(1, exo19(5, 5), "exo19(5, 5)");
 }
 END_TEST_CASE
 

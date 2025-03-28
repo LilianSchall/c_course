@@ -3,11 +3,11 @@
 
 #define _GNU_SOURCE
 #include <fcntl.h>
-#include <unistd.h>
 #include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 #define FIX_ME_MAISON                                                          \
   int pieces;                                                                  \
@@ -89,6 +89,16 @@ static void print_success(const char *format, ...) {
   } else {                                                                     \
     print_success("Test passed\n");                                            \
   }
+
+#define ASSERT_STDIN(content, command)                                   \
+  int stdin_fd = dup(fileno(stdin));                                           \
+  int pipefd[2];                                                               \
+  pipe2(pipefd, 0);                                                            \
+  write(pipefd[1], content, strlen(content));                                  \
+  dup2(pipefd[0], fileno(stdin));                                              \
+  command;                                                                     \
+  fflush(stdin);                                                               \
+  dup2(stdin_fd, fileno(stdin));
 
 /**
  * This macro should be instantiated with the keyword TEST_CASE. The idea is
